@@ -16,8 +16,8 @@ with open('/Users/anks/Documents/abc.txt', 'r') as f:
         lst1.append(int(num1))
         lst2.append(int(num2))
 
-lst1.sort()
-lst2.sort()
+out = 0
+for num in lst1:
+    out = out + (num * lst2.count(num))
 
-ans = reduce(func, list(zip(lst1, lst2)))
-print(ans)
+print(out)
