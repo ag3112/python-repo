@@ -90,7 +90,7 @@ def get_x_mas_combinations(grid):
                     grid, grid_idx + 1, line_idx - 1) == 'S' and get_char(grid, grid_idx + 1, line_idx + 1) == 'M':
                     count += 1
 
-                # check the circumference - left SM A SM
+                # check the circumference - left MM A SS
                 if get_char(grid, grid_idx - 1, line_idx - 1) == 'M' and get_char(grid, grid_idx - 1,
                                                                                   line_idx + 1) == 'M' and get_char(
                     grid, grid_idx + 1, line_idx - 1) == 'S' and get_char(grid, grid_idx + 1, line_idx + 1) == 'S':
