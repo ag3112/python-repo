@@ -7,7 +7,7 @@ def get_char(grid, grid_idx, line_idx):
         try:
             out = grid[grid_idx][line_idx]
         except:
-            out = ''
+            pass
     return out
 
 
