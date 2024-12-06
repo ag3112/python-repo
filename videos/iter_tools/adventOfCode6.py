@@ -4,11 +4,19 @@ with open('/Users/anks/Documents/abc.txt', 'r') as file:
 
 def get_char(grid, grid_idx, line_idx):
     ch = 'escape'
-    try:
-        ch = grid[grid_idx][line_idx]
-    except:
-        pass
+    if grid_idx < 0 or line_idx < 0:
+        ch = 'escape'
+    else:
+        try:
+            ch = grid[grid_idx][line_idx]
+        except:
+            ch = 'escape'
     return ch
+
+
+def get_grid_shape(grid):
+    return len(grid), len(grid[0])
+
 
 def where_is_the_guard(grid):
     for grid_idx in range(0, len(grid)):
@@ -17,19 +25,23 @@ def where_is_the_guard(grid):
                 guard_position = (grid_idx, line_idx)
     return guard_position
 
+
 def safe_path_index(grid, guard_position):
     grid_idx, line_idx = guard_position
+    max_grid_idx, max_line_idx = get_grid_shape(grid)
     move_right = False
     move_down = False
     move_left = False
     move_up = True
 
+    # safe_cordinates = set()
     safe_cordinates = []
     print('Guard: ', guard_position)
 
     while True:
         curr_char = get_char(grid, grid_idx, line_idx)
         if curr_char == '#':
+            print('#: ', grid_idx, line_idx)
             if move_up:
                 move_right = True
                 move_up = False
@@ -69,20 +81,24 @@ def safe_path_index(grid, guard_position):
             safe_cordinates.append((grid_idx, line_idx))
             if move_up:
                 grid_idx = grid_idx - 1
+                continue
 
             if move_right:
                 line_idx = line_idx + 1
+                continue
 
             if move_down:
-                grid_idx =  grid_idx + 1
+                grid_idx = grid_idx + 1
+                continue
 
             if move_left:
                 line_idx = line_idx - 1
+                continue
 
     return safe_cordinates
 
 
-
 guard_pos = where_is_the_guard(grid)
 coordinates = safe_path_index(grid, guard_pos)
+print(coordinates)
 print(len(set(coordinates)))
